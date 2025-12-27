@@ -21,7 +21,6 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    // SUPERADMIN, ADMIN, HR, PAYROLL
     @Column(nullable = false)
-    private String role;
+    private String role; // SUPERADMIN, ADMIN, HR, PAYROLL
 }

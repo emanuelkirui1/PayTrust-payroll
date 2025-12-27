@@ -1,14 +1,23 @@
 package com.paytrust.payroll.model;
+
 import jakarta.persistence.*;
-import java.util.List;
+import lombok.*;
 
 @Entity
-@Table(name="payrolls")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Payroll {
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY) private Long id;
-    @ManyToOne private Employee employee;
-    private Double grossSalary, netSalary;
-    private String payPeriod;
-    @OneToMany(mappedBy="payroll", cascade=CascadeType.ALL) private List<Allowance> allowances;
-    @OneToMany(mappedBy="payroll", cascade=CascadeType.ALL) private List<Deduction> deductions;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Long employeeId;
+    private double basicSalary;
+    private double allowances;
+    private double deductions;
+    private double netPay;
+    private int paidLeaveDays;
+    private int unpaidLeaveDays;
+    private String month;
 }

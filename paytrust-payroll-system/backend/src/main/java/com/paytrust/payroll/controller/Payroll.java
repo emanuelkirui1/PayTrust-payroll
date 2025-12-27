@@ -8,18 +8,17 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "employees")
-public class Employee {
+@Table(name = "payrolls")
+public class Payroll {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phone;
-
-    private String position;
-    private double salary;
+    private Long employeeId;
+    private double basicSalary;
+    private double allowances;
+    private double deductions;
+    private double netPay;
+    private String month;
 }

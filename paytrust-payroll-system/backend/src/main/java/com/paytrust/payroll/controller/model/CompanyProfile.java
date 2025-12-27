@@ -8,18 +8,18 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "employees")
-public class Employee {
+@Table(name = "company_profile")
+public class CompanyProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String firstName;
-    private String lastName;
-    private String email;
+    private String companyName;
+    private String slogan;
     private String phone;
+    private String email;
 
-    private String position;
-    private double salary;
+    @Column(length = 1000)
+    private String description;
 }
