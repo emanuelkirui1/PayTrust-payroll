@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/paytrust
+    username: ${DB_USER:postgres}
+    password: ${DB_PASS:password}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+jwt:
+  secret: ${JWT_SECRET:paytrust_secret_key}
+  expiration: 86400000
+

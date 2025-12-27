@@ -1,0 +1,21 @@
+{
+  "family": "paytrust-payroll-task",
+  "networkMode": "awsvpc",
+  "containerDefinitions": [
+    {
+      "name": "backend",
+      "image": "your-aws-account-id.dkr.ecr.region.amazonaws.com/paytrust-backend:latest",
+      "essential": true,
+      "portMappings": [{"containerPort": 8080}]
+    },
+    {
+      "name": "frontend",
+      "image": "your-aws-account-id.dkr.ecr.region.amazonaws.com/paytrust-frontend:latest",
+      "essential": true,
+      "portMappings": [{"containerPort": 3000}]
+    }
+  ],
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024" 
+}
