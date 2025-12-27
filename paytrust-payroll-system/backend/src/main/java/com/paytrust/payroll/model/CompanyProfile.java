@@ -12,8 +12,8 @@ public class CompanyProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String companyName;
-    private String slogan;
     private String email;
     private String phone;
     private String description;
+    private String billingPlan; // Basic, Pro, Enterprise
 }

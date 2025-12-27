@@ -11,8 +11,6 @@ public class Payroll {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private Long employeeId;
     private double basicSalary;
     private double allowances;
     private double deductions;
@@ -20,4 +18,7 @@ public class Payroll {
     private int paidLeaveDays;
     private int unpaidLeaveDays;
     private String month;
+
+    @ManyToOne
+    private Employee employee;
 }

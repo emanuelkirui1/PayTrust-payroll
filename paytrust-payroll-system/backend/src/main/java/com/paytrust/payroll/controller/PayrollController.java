@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/superadmin/payrolls")
+@RequestMapping("/api/company/payrolls")
 public class PayrollController {
 
     @Autowired
@@ -18,24 +18,24 @@ public class PayrollController {
     @Autowired
     private AuditLogRepository auditRepo;
 
-    private void logAction(String action, String by) {
+    private void log(String action, String by) {
         auditRepo.save(new AuditLog(null, action, by, null));
     }
 
-    @GetMapping
-    public List<Payroll> getAll() {
-        return payrollRepo.findAll();
+    @GetMapping("/{companyId}")
+    public List<Payroll> getPayrolls(@PathVariable Long companyId) {
+        return payrollRepo.findByEmployee_Company_Id(companyId);
     }
 
     @PostMapping
     public Payroll add(@RequestBody Payroll payroll) {
         Payroll saved = payrollRepo.save(payroll);
-        logAction("Added payroll for employee " + payroll.getEmployeeId(), "SuperAdmin");
+        log("Added payroll for employee "+payroll.getEmployee().getId(),"CompanyAdmin");
         return saved;
     }
 
     @PutMapping("/{id}")
-    public Payroll update(@PathVariable Long id, @RequestBody Payroll payroll) {
+    public Payroll update(@PathVariable Long id,@RequestBody Payroll payroll) {
         Payroll existing = payrollRepo.findById(id).orElseThrow();
         existing.setBasicSalary(payroll.getBasicSalary());
         existing.setAllowances(payroll.getAllowances());
@@ -44,13 +44,13 @@ public class PayrollController {
         existing.setUnpaidLeaveDays(payroll.getUnpaidLeaveDays());
         existing.setNetPay(payroll.getNetPay());
         Payroll saved = payrollRepo.save(existing);
-        logAction("Updated payroll id " + id, "SuperAdmin");
+        log("Updated payroll id "+id,"CompanyAdmin");
         return saved;
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         payrollRepo.deleteById(id);
-        logAction("Deleted payroll id " + id, "SuperAdmin");
+        log("Deleted payroll id "+id,"CompanyAdmin");
     }
 }
