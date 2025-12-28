@@ -7,19 +7,13 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
-public class User {
+public class Company {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
-    private String password;
-
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
-    @ManyToOne
-    private Company company;
+    private String name;
+    private boolean activeSubscription;
+    private String plan; // BASIC, PRO, ENTERPRISE
 }

@@ -1,7 +1,10 @@
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk as build
 WORKDIR /app
-COPY pom.xml .
-COPY src ./src
-RUN ./mvnw package -DskipTests
+COPY . .
+RUN ./mvnw -DskipTests package
+
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-CMD ["java","-jar","target/payroll-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
